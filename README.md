@@ -1,4 +1,4 @@
-## auth.sherbolotarbaev.co ✨
+## auth.sherbolotarbaev.co 🔒
 
 - Framework: [Next.js](https://nextjs.org/)
 - Deployment: [Vercel](https://vercel.com/)
