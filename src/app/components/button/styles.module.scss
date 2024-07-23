@@ -1,0 +1,112 @@
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  @media (max-width: 768px) {
+    cursor: default;
+  }
+
+  &.small {
+    gap: 0.15rem;
+
+    padding: 0.25rem;
+
+    border-radius: var(--border-radius-200);
+
+    font-size: 0.835rem;
+  }
+
+  &.disabled,
+  &.load {
+    background: var(--bg-main-hover);
+
+    cursor: not-allowed;
+
+    color: var(--color-600);
+
+    &:hover,
+    &:active {
+      background: var(--bg-main-hover);
+
+      color: var(--color-600);
+    }
+  }
+
+  .loader {
+    animation: rotateAnimation 0.9s infinite linear;
+
+    @keyframes rotateAnimation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &.pulse_animation {
+    transform: scale(1);
+    box-shadow: 0 0 0 var(--bg-white);
+    animation: animation 2s infinite;
+
+    @keyframes animation {
+      0% {
+        transform: scale(0.99);
+        box-shadow: 0 0 0 0 var(--bg-blue);
+      }
+
+      75% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0.4rem var(--bg-white);
+      }
+
+      100% {
+        transform: scale(0.99);
+        box-shadow: 0 0 0 0 var(--bg-white);
+      }
+    }
+  }
+
+  &.blue {
+    background: var(--bg-blue);
+    border-color: transparent;
+
+    color: var(--bg-white);
+
+    &:hover {
+      color: var(--bg-white);
+      background: var(--bg-blue-hover);
+    }
+
+    &:active {
+      background: var(--bg-blue-active);
+    }
+
+    &.disabled,
+    &.load {
+      background: var(--bg-blue-hover);
+
+      cursor: not-allowed;
+
+      color: var(--color-600);
+
+      &:hover,
+      &:active {
+        background: var(--bg-blue-hover);
+
+        color: var(--color-600);
+      }
+    }
+  }
+}

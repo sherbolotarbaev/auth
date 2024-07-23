@@ -1,0 +1,32 @@
+.main {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('/images/hero.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-repeat: no-repeat;
+
+  @media (max-width: 985px) {
+    background: none;
+  }
+}
+
+.wrapper {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .content_container {
+      width: 100%;
+
+      max-width: 24rem;
+    }
+  }
+}
