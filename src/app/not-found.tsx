@@ -14,9 +14,11 @@ export default function NotFound() {
   return (
     <div className={clsx('wrapper', styles.wrapper)}>
       <div className={clsx('container', styles.container)}>
-        <h2 className="title">{"Oh no! This page doesn't exist."}</h2>
+        <h2 className={clsx('title', styles.title)}>
+          {"Oh no! This page doesn't exist."}
+        </h2>
 
-        <p className="desc">
+        <p className={clsx('desc', styles.desc)}>
           If you expected to see something here, let me know (arbaevsherbolot@gmail.com).
         </p>
       </div>

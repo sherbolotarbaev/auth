@@ -12,5 +12,13 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    .title {
+      color: var(--bg-white);
+    }
+
+    .desc {
+      color: var(--bg-white-hover);
+    }
   }
 }
