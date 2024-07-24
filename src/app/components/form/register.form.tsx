@@ -26,17 +26,17 @@ export default function RegisterForm() {
 
           <OAuthButtons />
 
-          <p className={clsx('desc', styles.desc)}>
-            When creating an account, you agree to our Terms of Service and Privacy
-            Policy.
-          </p>
-
           <Link
             className={clsx('link', styles.link)}
             href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
           >
-            Already have an account? Log in
+            Already have an account? Sign in
           </Link>
+
+          <p className={clsx('desc', styles.desc)}>
+            When creating an account, you agree to our Terms of Service and Privacy
+            Policy.
+          </p>
         </div>
       </form>
     </>

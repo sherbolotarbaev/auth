@@ -28,17 +28,17 @@
 
   &.disabled,
   &.load {
-    background: var(--bg-main-hover);
+    background: var(--bg-white-hover);
 
     cursor: not-allowed;
 
-    color: var(--color-600);
+    color: var(--color-300);
 
     &:hover,
     &:active {
-      background: var(--bg-main-hover);
+      background: var(--bg-white-hover);
 
-      color: var(--color-600);
+      color: var(--color-300);
     }
   }
 
@@ -99,13 +99,15 @@
 
       cursor: not-allowed;
 
-      color: var(--color-600);
+      color: var(--bg-white-active);
+
+      opacity: 0.6;
 
       &:hover,
       &:active {
         background: var(--bg-blue-hover);
 
-        color: var(--color-600);
+        color: var(--bg-white-active);
       }
     }
   }

@@ -8,27 +8,6 @@
     flex-direction: column;
     gap: 1.25rem;
 
-    .text {
-      .title {
-        font-size: 1.25rem;
-        color: var(--bg-500);
-      }
-
-      .desc {
-        line-height: 1.25rem;
-
-        font-size: 0.825rem;
-        color: var(--color-300);
-      }
-    }
-
-    .desc {
-      line-height: 1.25rem;
-
-      font-size: 0.785rem;
-      color: var(--color-300);
-    }
-
     .link {
       text-align: center;
       text-decoration: underline;
@@ -45,7 +24,7 @@
 
         flex-grow: 1;
 
-        background: var(--color-200);
+        background: var(--color-300);
         border: 0;
       }
 
@@ -53,7 +32,7 @@
         margin: 0 18px;
 
         font-size: 0.755rem;
-        color: var(--color-200);
+        color: var(--color-600);
       }
     }
   }

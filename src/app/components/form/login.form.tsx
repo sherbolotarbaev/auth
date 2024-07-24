@@ -95,7 +95,7 @@ export default function LoginForm() {
           <div className={clsx('text', styles.text)}>
             <h2 className={clsx('title', styles.title)}>Welcome back 👋</h2>
 
-            <p className={clsx('desc', styles.desc)}>Log in to your account.</p>
+            <p className={clsx('desc', styles.desc)}>Sign in to your account.</p>
           </div>
 
           <OAuthButtons />
@@ -155,16 +155,16 @@ export default function LoginForm() {
             {!isOtpSent ? 'Continue' : 'Sign in'}
           </Button>
 
-          <p className={clsx('desc', styles.desc)}>
-            By logging in, you agree to our Terms of Service and Privacy Policy.
-          </p>
-
           <Link
             className={clsx('link', styles.link)}
             href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
           >
             {"Don't have an account? Sign Up"}
           </Link>
+
+          <p className={clsx('desc', styles.desc)}>
+            By signing in, you agree to our Terms of Service and Privacy Policy.
+          </p>
         </div>
       </form>
     </>
