@@ -19,12 +19,10 @@ export default function RedirectClient() {
   return (
     <>
       <div className={clsx('wrapper', styles.wrapper)}>
-        <div className="text">
-          <p className="desc">
-            <BiLoader size={20} className={styles.loader} />
-            Redirection...
-          </p>
-        </div>
+        <p className={clsx('desc', styles.desc)}>
+          <BiLoader size={20} className={styles.loader} />
+          Redirection...
+        </p>
       </div>
     </>
   );
