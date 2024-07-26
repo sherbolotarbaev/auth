@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { type ReactElement, useEffect } from 'react';
 
+import { useTranslation } from 'shared/hooks/use-translation';
 import { toast } from 'sonner';
 
 import Button from '.';
@@ -16,45 +17,48 @@ type ErrorCode = {
   message: string;
 };
 
-const errorCodes: ErrorCode[] = [
-  {
-    code: '403',
-    message: 'User has been deactivated.',
-  },
-  {
-    code: 'access_denied',
-    message: 'Authentication cancelled.',
-  },
-];
-
 type AuthProvider = {
   name: 'google' | 'github';
   svgIcon: ReactElement;
   actionText?: string;
 };
 
-const authProviders: AuthProvider[] = [
-  {
-    name: 'google',
-    svgIcon: <FcGoogle size={17} />,
-    actionText: 'Continue with Google',
-  },
-  {
-    name: 'github',
-    svgIcon: <BiLogoGithub size={18} />,
-    actionText: 'Continue with GitHub',
-  },
-];
-
 const OAuthButtons = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const error = searchParams.get('error');
   const next = searchParams.get('next') || '/';
 
+  const { t } = useTranslation();
+
+  const errorCodes: ErrorCode[] = [
+    {
+      code: '403',
+      message: t('error_user_deactivated'),
+    },
+    {
+      code: 'access_denied',
+      message: t('error_auth_cancelled'),
+    },
+  ];
+
+  const authProviders: AuthProvider[] = [
+    {
+      name: 'google',
+      svgIcon: <FcGoogle size={17} />,
+      actionText: t('google_button'),
+    },
+    {
+      name: 'github',
+      svgIcon: <BiLogoGithub size={18} />,
+      actionText: t('github_button'),
+    },
+  ];
+
   const handleErrorAlert = (message?: string) => {
-    toast.error(message || 'Try again. Something happened on our end', {
+    toast.error(message || t('error_generic'), {
       position: 'top-center',
       duration: 5000,
     });

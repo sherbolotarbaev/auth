@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
+import { useTranslation } from 'shared/hooks/use-translation';
 
 import OAuthButtons from 'components/button/oauth-buttons';
 import Logo from 'components/logo';
@@ -13,6 +14,8 @@ const RegisterForm = () => {
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/';
 
+  const { t } = useTranslation();
+
   return (
     <>
       <form className={styles.form}>
@@ -20,11 +23,9 @@ const RegisterForm = () => {
           <div className={clsx('text', styles.text)}>
             <Logo />
 
-            <h2 className={clsx('title', styles.title)}>Create your account</h2>
+            <h2 className={clsx('title', styles.title)}>{t('signUp_title')}</h2>
 
-            <p className={clsx('desc', styles.desc)}>
-              Welcome! You can create an account using a <br /> Google or GitHub.
-            </p>
+            <p className={clsx('desc', styles.desc)}>{t('signUp_description')}</p>
           </div>
 
           <OAuthButtons />
@@ -36,12 +37,12 @@ const RegisterForm = () => {
               justifyContent: 'center',
             }}
           >
-            Already have an account?
+            {t('signUp_link_description')}
             <Link
               className="link"
               href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
             >
-              Sign in
+              {t('signUp_link')}
             </Link>
           </p>
         </div>

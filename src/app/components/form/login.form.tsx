@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { useLogInOtpMutation, useSendOtpMutation } from '@/redux/api/auth';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'shared/hooks/use-translation';
 
 import { getCookie, setCookie } from 'cookies-next';
 import { toast } from 'sonner';
@@ -28,6 +29,8 @@ const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/';
+
+  const { t } = useTranslation();
 
   const cookieEmail = getCookie('email');
 
@@ -69,13 +72,17 @@ const LoginForm = () => {
 
     toast.promise(sendOtp({ email }).unwrap(), {
       position: 'top-center',
-      loading: 'Sending...',
+      loading: t('sendOtp_loading'),
       success: () => {
         setIsOtpSent(true);
-        return `Verification code sent successfully`;
+        return t('sendOtp_success');
       },
       error: (error) => {
-        return error.data?.message || 'Try again. Something happened on our end';
+        return error.data?.message === 'User does not exist.'
+          ? t('error_user_not_found')
+          : error.data?.message === 'User has been deactivated.'
+          ? t('error_user_deactivated')
+          : t('error_generic');
       },
     });
   };
@@ -90,15 +97,19 @@ const LoginForm = () => {
     if (checkIsOtpValid()) {
       toast.promise(logIn({ email, otp, next }).unwrap(), {
         position: 'top-center',
-        loading: 'Loading...',
+        loading: t('loginOtp_loading'),
         success: ({ redirectUrl, email }: LogInOtpResponse) => {
           setSuccess(true);
           setCookie('email', email);
           router.push(`/?to=${redirectUrl}`);
-          return `Successful sign in as ${email}`;
+          return `${t('loginOtp_success')} ${email}`;
         },
         error: (error) => {
-          return error.data?.message || 'Try again. Something happened on our end';
+          return error.data?.message === 'Incorrect verification code.'
+            ? t('error_otp_invalid')
+            : error.data?.message === 'Verification code expired.'
+            ? t('error_otp_expired')
+            : t('error_generic');
         },
       });
     }
@@ -111,32 +122,30 @@ const LoginForm = () => {
           <div className={clsx('text', styles.text)}>
             <Logo />
 
-            <h2 className={clsx('title', styles.title)}>Sign in to sherbolotarbaev.co</h2>
+            <h2 className={clsx('title', styles.title)}>{t('signIn_title')}</h2>
 
-            <p className={clsx('desc', styles.desc)}>
-              Welcome back! Please sign in to continue.
-            </p>
+            <p className={clsx('desc', styles.desc)}>{t('signIn_description')}</p>
           </div>
 
           <OAuthButtons />
 
           <div className={styles.divider}>
             <hr />
-            <span>or</span>
+            <span>{t('divider')}</span>
             <hr />
           </div>
 
           <Input
-            label="Email address"
+            label={t('email_label')}
             // placeholder="Enter your email..."
             error={errors.email && errors.email.message}
             load={isOtpSending || isLoading}
             disabled={isOtpSending || isLoading || success}
             register={register('email', {
-              required: 'Please enter your email',
+              required: t('email_required'),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email',
+                message: t('email_invalid'),
               },
               onChange: () => {
                 setIsOtpSent(false);
@@ -152,23 +161,23 @@ const LoginForm = () => {
               disabled={isOtpSending || success || !isValid}
               pulseAnimation={success || isValid}
             >
-              Continue <BiSolidRightArrow size={8} />
+              {t('button')} <BiSolidRightArrow size={8} />
             </Button>
           )}
 
           {isOtpSent && (
             <>
               <Input
-                label="6-digit verification code"
+                label={t('otp_label')}
                 // placeholder="Paste verification code..."
                 error={errors.email && errors.email.message}
                 load={isLoading}
                 disabled={isLoading || success}
                 register={register('otp', {
-                  required: 'Please enter verification code',
+                  required: t('otp_required'),
                   pattern: {
                     value: /^\d+$/,
-                    message: 'Please enter only numbers',
+                    message: t('otp_invalid'),
                   },
                   minLength: 6,
                   maxLength: 6,
@@ -176,7 +185,7 @@ const LoginForm = () => {
               />
 
               <div className="text">
-                <p className="desc">We sent a code to your inbox.</p>
+                <p className="desc">{t('email_sent_message')}</p>
               </div>
             </>
           )}
@@ -188,12 +197,12 @@ const LoginForm = () => {
               justifyContent: 'center',
             }}
           >
-            {"Don't"} have an account?
+            {t('signIn_link_description')}
             <Link
               className="link"
               href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
             >
-              Sign Up
+              {t('signIn_link')}
             </Link>
           </p>
         </div>

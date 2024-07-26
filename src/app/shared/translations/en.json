@@ -1,0 +1,39 @@
+{
+  "signIn_title": "Sign in to sherbolotarbaev.co",
+  "signIn_description": "Welcome back! Please sign in to continue.",
+  "signIn_link_description": "Don't have an account?",
+  "signIn_link": "Sign Up",
+
+  "signUp_title": "Create your account",
+  "signUp_description": "Welcome! You can create an account using a Google or GitHub.",
+  "signUp_link_description": "Already have an account?",
+  "signUp_link": "Sign in",
+
+  "divider": "or",
+  "button": "Continue",
+
+  "google_button": "Continue with Google",
+  "github_button": "Continue with GitHub",
+
+  "sendOtp_loading": "Sending...",
+  "sendOtp_success": "Verification code sent successfully",
+
+  "loginOtp_loading": "Verifying...",
+  "loginOtp_success": "Successful sign in as",
+
+  "error_otp_invalid": "Incorrect verification code.",
+  "error_otp_expired": "Verification code expired.",
+  "error_user_not_found": "User does not exist.",
+  "error_user_deactivated": "User has been deactivated.",
+  "error_auth_cancelled": "Authentication cancelled.",
+  "error_generic": "Try again. Something happened on our end.",
+
+  "email_label": "Email address",
+  "email_required": "Please enter your email",
+  "email_invalid": "Please enter a valid email",
+  "email_sent_message": "We sent a code to your inbox.",
+
+  "otp_label": "6-digit verification code",
+  "otp_required": "Please enter verification code",
+  "otp_invalid": "Please enter only numbers"
+}

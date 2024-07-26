@@ -10,8 +10,10 @@ interface RootLayoutClientProps {
 export default function RootLayoutClient({ children }: Readonly<RootLayoutClientProps>) {
   return (
     <>
-      <Providers>{children}</Providers>
-      <Toaster />
+      <Providers>
+        {children}
+        <Toaster />
+      </Providers>
     </>
   );
 }

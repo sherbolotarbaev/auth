@@ -1,5 +1,6 @@
 'use client';
 
+import LanguageProvider from './language';
 import ReduxProvider from './redux';
 
 interface ProvidersProps {
@@ -7,6 +8,12 @@ interface ProvidersProps {
 }
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
-  return <ReduxProvider>{children}</ReduxProvider>;
+  return (
+    <>
+      <LanguageProvider>
+        <ReduxProvider>{children}</ReduxProvider>
+      </LanguageProvider>
+    </>
+  );
 };
 export default Providers;

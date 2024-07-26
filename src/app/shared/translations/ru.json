@@ -1,0 +1,39 @@
+{
+  "signIn_title": "Войдите на sherbolotarbaev.co",
+  "signIn_description": "С возвращением! Пожалуйста, войдите, чтобы продолжить.",
+  "signIn_link_description": "Нет аккаунта?",
+  "signIn_link": "Зарегистрироваться",
+
+  "signUp_title": "Создайте свой аккаунт",
+  "signUp_description": "Добро пожаловать! Вы можете создать аккаунт, используя Google или GitHub.",
+  "signUp_link_description": "Уже есть аккаунт?",
+  "signUp_link": "Войти",
+
+  "divider": "или",
+  "button": "Продолжить",
+
+  "google_button": "Продолжить с Google",
+  "github_button": "Продолжить с GitHub",
+
+  "sendOtp_loading": "Отправка...",
+  "sendOtp_success": "Код подтверждения отправлен успешно",
+
+  "loginOtp_loading": "Проверка...",
+  "loginOtp_success": "Успешный вход в систему как",
+
+  "error_otp_invalid": "Неверный код подтверждения.",
+  "error_otp_expired": "Истек срок действия кода подтверждения.",
+  "error_user_not_found": "Пользователь не существует.",
+  "error_user_deactivated": "Пользователь был деактивирован.",
+  "error_auth_cancelled": "Аутентификация отменена.",
+  "error_generic": "Попробуйте еще раз. Что-то произошло на нашей стороне.",
+
+  "email_label": "Адрес электронной почты",
+  "email_required": "Пожалуйста, введите свою электронную почту",
+  "email_invalid": "Пожалуйста, введите действительный адрес электронной почты",
+  "email_sent_message": "Мы отправили код на вашу почту.",
+
+  "otp_label": "6-значный код подтверждения",
+  "otp_required": "Пожалуйста, введите код подтверждения",
+  "otp_invalid": "Пожалуйста, введите только цифры"
+}
