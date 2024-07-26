@@ -32,16 +32,14 @@ body {
 
   overflow-x: hidden;
 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
-    url('/images/hero.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50%;
-  background-repeat: no-repeat;
-
-  @media (max-width: 985px) {
-    background: var(--bg-main);
-  }
+  background: conic-gradient(
+    from 73.6deg at 50% 50%,
+    rgb(206 255 150) -102.55deg,
+    rgb(0 39 55) 0.19deg,
+    rgb(30 67 74) 131.9deg,
+    rgb(6 255 152) 257.45deg,
+    rgb(0 39 55) 360.19deg
+  );
 
   color: var(--color-800);
 
@@ -64,7 +62,7 @@ body {
   .container {
     width: 100%;
 
-    padding: 0 1.25rem;
+    padding: 0 1rem;
   }
 
   .title,
