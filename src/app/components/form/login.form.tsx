@@ -1,19 +1,18 @@
 'use client';
 
+import clsx from 'clsx';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import clsx from 'clsx';
-
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { useLogInOtpMutation, useSendOtpMutation } from '@/redux/api/auth';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { getCookie, setCookie } from 'cookies-next';
 import { toast } from 'sonner';
-import { setCookie, getCookie } from 'cookies-next';
 
-import Input from 'components/input';
 import Button from 'components/button';
 import OAuthButtons from 'components/button/oauth-buttons';
+import Input from 'components/input';
 import Link from 'next/link';
 
 import styles from './styles.module.scss';
@@ -23,7 +22,7 @@ type FormData = {
   otp: string;
 };
 
-export default function LoginForm() {
+const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/';
@@ -169,4 +168,5 @@ export default function LoginForm() {
       </form>
     </>
   );
-}
+};
+export default LoginForm;

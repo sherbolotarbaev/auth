@@ -20,24 +20,3 @@ type UserMetaData = {
   timezone?: string;
   lastSeen: Date;
 };
-
-type GuestbookMessage = {
-  id: number;
-  message: string;
-  isEdited: boolean;
-  createdAt: string;
-  updatedAt: string;
-  author: {
-    name: string;
-    email: string;
-    photo: string;
-    isVerified: boolean;
-  };
-};
-
-type Action = {
-  name: 'Delete';
-  title: string;
-  desc: string;
-  body: React.ReactNode;
-};

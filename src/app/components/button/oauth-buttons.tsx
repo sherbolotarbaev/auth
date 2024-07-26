@@ -1,14 +1,14 @@
 'use client';
 
-import { type ReactElement, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { type ReactElement, useEffect } from 'react';
 
 import { toast } from 'sonner';
 
 import Button from '.';
 
-import { FcGoogle } from 'react-icons/fc';
 import { BiLogoGithub } from 'react-icons/bi';
+import { FcGoogle } from 'react-icons/fc';
 import styles from './styles.module.scss';
 
 type ErrorCode = {
@@ -46,7 +46,7 @@ const authProviders: AuthProvider[] = [
   },
 ];
 
-export default function OAuthButtons() {
+const OAuthButtons = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -89,4 +89,5 @@ export default function OAuthButtons() {
       </div>
     </>
   );
-}
+};
+export default OAuthButtons;

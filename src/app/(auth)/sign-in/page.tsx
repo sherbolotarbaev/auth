@@ -7,14 +7,16 @@ import styles from '../styles.module.scss';
 
 export default function SignIn() {
   return (
-    <div className={clsx('wrapper', styles.wrapper)}>
-      <div className={clsx('container', styles.container)}>
-        <div className={styles.content_container}>
-          <Banner>
-            <LoginForm />
-          </Banner>
+    <>
+      <div className={clsx('wrapper', styles.wrapper)}>
+        <div className={clsx('container', styles.container)}>
+          <div className={styles.content_container}>
+            <Banner>
+              <LoginForm />
+            </Banner>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

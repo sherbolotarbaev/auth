@@ -6,10 +6,7 @@ interface ProvidersProps {
   children: React.ReactNode;
 }
 
-export default function Providers({ children }: Readonly<ProvidersProps>) {
-  return (
-    <>
-      <ReduxProvider>{children}</ReduxProvider>
-    </>
-  );
-}
+const Providers: React.FC<ProvidersProps> = ({ children }) => {
+  return <ReduxProvider>{children}</ReduxProvider>;
+};
+export default Providers;

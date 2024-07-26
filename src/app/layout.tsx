@@ -25,12 +25,14 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en">
-      <body style={geistSans.style}>
-        <Suspense>
-          <RootLayoutClient>{children}</RootLayoutClient>
-        </Suspense>
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body style={geistSans.style}>
+          <Suspense>
+            <RootLayoutClient>{children}</RootLayoutClient>
+          </Suspense>
+        </body>
+      </html>
+    </>
   );
 }

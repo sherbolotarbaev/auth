@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 import { BiLoader } from 'react-icons/bi';
 import styles from './styles.module.scss';
@@ -19,7 +18,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 type Theme = 'blue';
 
-export default function Button({
+const Button: React.FC<ButtonProps> = ({
   children,
   width,
   load = false,
@@ -29,7 +28,7 @@ export default function Button({
   small = false,
   pulseAnimation = false,
   ...props
-}: Readonly<ButtonProps>) {
+}) => {
   const router = useRouter();
 
   const className = clsx(
@@ -67,4 +66,5 @@ export default function Button({
       {load ? <BiLoader size={19} className={styles.loader} /> : children}
     </button>
   );
-}
+};
+export default Button;

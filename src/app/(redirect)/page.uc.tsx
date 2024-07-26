@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import clsx from 'clsx';
+import { useEffect } from 'react';
 
 import { BiLoader } from 'react-icons/bi';
 import styles from './styles.module.scss';

@@ -12,14 +12,14 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   register?: UseFormRegisterReturn<any>;
 }
 
-export default function Input({
+const Input: React.FC<InputProps> = ({
   label,
   name,
   load,
   error,
   register,
   ...props
-}: Readonly<InputProps>) {
+}) => {
   const className = clsx(
     'input-reset',
     styles.input,
@@ -49,4 +49,5 @@ export default function Input({
       />
     </div>
   );
-}
+};
+export default Input;

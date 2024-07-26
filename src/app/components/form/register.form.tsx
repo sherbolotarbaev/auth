@@ -1,14 +1,14 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
+import { useSearchParams } from 'next/navigation';
 
 import OAuthButtons from 'components/button/oauth-buttons';
 import Link from 'next/link';
 
 import styles from './styles.module.scss';
 
-export default function RegisterForm() {
+const RegisterForm = () => {
   const searchParams = useSearchParams();
   const next = searchParams.get('next') || '/';
 
@@ -41,4 +41,5 @@ export default function RegisterForm() {
       </form>
     </>
   );
-}
+};
+export default RegisterForm;
