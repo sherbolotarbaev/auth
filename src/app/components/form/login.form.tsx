@@ -16,6 +16,7 @@ import Input from 'components/input';
 import Logo from 'components/logo';
 import Link from 'next/link';
 
+import { BiSolidRightArrow } from 'react-icons/bi';
 import styles from './styles.module.scss';
 
 type FormData = {
@@ -151,7 +152,7 @@ const LoginForm = () => {
               disabled={isOtpSending || success || !isValid}
               pulseAnimation={success || isValid}
             >
-              Continue
+              Continue <BiSolidRightArrow size={8} />
             </Button>
           )}
 
