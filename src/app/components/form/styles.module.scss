@@ -8,9 +8,12 @@
     flex-direction: column;
     gap: 1.25rem;
 
-    .link {
+    .text {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+
       text-align: center;
-      text-decoration: underline;
     }
 
     .divider {
@@ -31,7 +34,7 @@
       span {
         margin: 0 18px;
 
-        font-size: 0.755rem;
+        font-size: 0.8125rem;
         color: var(--color-600);
       }
     }

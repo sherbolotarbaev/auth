@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
 
 import OAuthButtons from 'components/button/oauth-buttons';
+import Logo from 'components/logo';
 import Link from 'next/link';
 
 import styles from './styles.module.scss';
@@ -17,25 +18,31 @@ const RegisterForm = () => {
       <form className={styles.form}>
         <div className={clsx('container', styles.container)}>
           <div className={clsx('text', styles.text)}>
-            <h2 className={clsx('title', styles.title)}>Welcome 👋</h2>
+            <Logo />
+
+            <h2 className={clsx('title', styles.title)}>Create your account</h2>
 
             <p className={clsx('desc', styles.desc)}>
-              You can create an account using a Google or GitHub.
+              Welcome! You can create an account using a <br /> Google or GitHub.
             </p>
           </div>
 
           <OAuthButtons />
 
-          <Link
-            className={clsx('link', styles.link)}
-            href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
+          <p
+            className="desc"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
           >
-            Already have an account? Sign in
-          </Link>
-
-          <p className={clsx('desc', styles.desc)}>
-            When creating an account, you agree to our Terms of Service and Privacy
-            Policy.
+            Already have an account?
+            <Link
+              className="link"
+              href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
+            >
+              Sign in
+            </Link>
           </p>
         </div>
       </form>

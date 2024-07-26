@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import Button from 'components/button';
 import OAuthButtons from 'components/button/oauth-buttons';
 import Input from 'components/input';
+import Logo from 'components/logo';
 import Link from 'next/link';
 
 import styles from './styles.module.scss';
@@ -107,22 +108,26 @@ const LoginForm = () => {
       <form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
         <div className={clsx('container', styles.container)}>
           <div className={clsx('text', styles.text)}>
-            <h2 className={clsx('title', styles.title)}>Welcome back 👋</h2>
+            <Logo />
 
-            <p className={clsx('desc', styles.desc)}>Sign in to your account.</p>
+            <h2 className={clsx('title', styles.title)}>Sign in to sherbolotarbaev.co</h2>
+
+            <p className={clsx('desc', styles.desc)}>
+              Welcome back! Please sign in to continue.
+            </p>
           </div>
 
           <OAuthButtons />
 
           <div className={styles.divider}>
             <hr />
-            <span>OR</span>
+            <span>or</span>
             <hr />
           </div>
 
           <Input
-            label="Email"
-            placeholder="Enter your email..."
+            label="Email address"
+            // placeholder="Enter your email..."
             error={errors.email && errors.email.message}
             load={isOtpSending || isLoading}
             disabled={isOtpSending || isLoading || success}
@@ -154,7 +159,7 @@ const LoginForm = () => {
             <>
               <Input
                 label="6-digit verification code"
-                placeholder="Paste verification code..."
+                // placeholder="Paste verification code..."
                 error={errors.email && errors.email.message}
                 load={isLoading}
                 disabled={isLoading || success}
@@ -175,15 +180,20 @@ const LoginForm = () => {
             </>
           )}
 
-          <Link
-            className={clsx('link', styles.link)}
-            href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
+          <p
+            className="desc"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
           >
-            {"Don't have an account? Sign Up"}
-          </Link>
-
-          <p className={clsx('desc', styles.desc)}>
-            By signing in, you agree to our Terms of Service and Privacy Policy.
+            {"Don't"} have an account?
+            <Link
+              className="link"
+              href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
+            >
+              Sign Up
+            </Link>
           </p>
         </div>
       </form>
