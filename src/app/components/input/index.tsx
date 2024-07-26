@@ -18,13 +18,15 @@ const Input: React.FC<InputProps> = ({
   load,
   error,
   register,
+  disabled,
+  type,
   ...props
 }) => {
   const className = clsx(
     'input-reset',
     styles.input,
-    props.disabled && styles.disabled,
-    props.type === 'password' && styles.password,
+    disabled && styles.disabled,
+    type === 'password' && styles.password,
     error && !load && styles.error,
     load && styles.load,
   );
@@ -43,7 +45,7 @@ const Input: React.FC<InputProps> = ({
 
       <input
         className={className}
-        disabled={load}
+        disabled={load || disabled}
         {...(register ? register : { name })}
         {...props}
       />

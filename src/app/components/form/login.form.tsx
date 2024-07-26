@@ -33,6 +33,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors, isValid },
   } = useForm<FormData>({ mode: 'onChange' });
 
@@ -41,6 +42,9 @@ const LoginForm = () => {
 
   const [isOtpSent, setIsOtpSent] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+
+  const otp = watch('otp');
+  const email = watch('email');
 
   const handleClearInput = (name: keyof FormData) => {
     if (name === 'email') {
@@ -51,8 +55,37 @@ const LoginForm = () => {
     setValue(name, '');
   };
 
-  const handleSubmitForm: SubmitHandler<FormData> = async ({ email, otp }) => {
-    if (isOtpSent) {
+  const checkIsOtpValid = () => {
+    if (otp && isOtpSent && otp.length === 6 && /^\d+$/.test(otp)) return true;
+    return false;
+  };
+
+  const handleSubmitForm: SubmitHandler<FormData> = async ({ email }) => {
+    if (checkIsOtpValid()) {
+      return;
+    }
+
+    toast.promise(sendOtp({ email }).unwrap(), {
+      position: 'top-center',
+      loading: 'Sending...',
+      success: () => {
+        setIsOtpSent(true);
+        return `Verification code sent successfully`;
+      },
+      error: (error) => {
+        return error.data?.message || 'Try again. Something happened on our end';
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (cookieEmail) {
+      setValue('email', cookieEmail);
+    }
+  }, [cookieEmail]);
+
+  useEffect(() => {
+    if (checkIsOtpValid()) {
       toast.promise(logIn({ email, otp, next }).unwrap(), {
         position: 'top-center',
         loading: 'Loading...',
@@ -66,26 +99,8 @@ const LoginForm = () => {
           return error.data?.message || 'Try again. Something happened on our end';
         },
       });
-    } else {
-      toast.promise(sendOtp({ email }).unwrap(), {
-        position: 'top-center',
-        loading: 'Sending...',
-        success: () => {
-          setIsOtpSent(true);
-          return `Verification code sent successfully`;
-        },
-        error: (error) => {
-          return error.data?.message || 'Try again. Something happened on our end';
-        },
-      });
     }
-  };
-
-  useEffect(() => {
-    if (cookieEmail) {
-      setValue('email', cookieEmail);
-    }
-  }, [cookieEmail]);
+  }, [otp, isOtpSent]);
 
   return (
     <>
@@ -109,8 +124,8 @@ const LoginForm = () => {
             label="Email"
             placeholder="Enter your email..."
             error={errors.email && errors.email.message}
-            load={isLoading}
-            disabled={success}
+            load={isOtpSending || isLoading}
+            disabled={isOtpSending || isLoading || success}
             register={register('email', {
               required: 'Please enter your email',
               pattern: {
@@ -124,16 +139,31 @@ const LoginForm = () => {
             })}
           />
 
+          {!isOtpSent && (
+            <Button
+              theme="blue"
+              load={isOtpSending}
+              disabled={isOtpSending || success || !isValid}
+              pulseAnimation={success || isValid}
+            >
+              Continue
+            </Button>
+          )}
+
           {isOtpSent && (
             <>
               <Input
-                label="Verification code"
+                label="6-digit verification code"
                 placeholder="Paste verification code..."
                 error={errors.email && errors.email.message}
                 load={isLoading}
-                disabled={success}
+                disabled={isLoading || success}
                 register={register('otp', {
                   required: 'Please enter verification code',
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'Please enter only numbers',
+                  },
                   minLength: 6,
                   maxLength: 6,
                 })}
@@ -144,15 +174,6 @@ const LoginForm = () => {
               </div>
             </>
           )}
-
-          <Button
-            theme="blue"
-            load={isLoading || isOtpSending}
-            disabled={success || !isValid}
-            pulseAnimation={success || isValid}
-          >
-            {!isOtpSent ? 'Continue' : 'Sign in'}
-          </Button>
 
           <Link
             className={clsx('link', styles.link)}
