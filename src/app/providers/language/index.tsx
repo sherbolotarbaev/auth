@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { createContext, useEffect, useState } from 'react';
 
 export type Language = 'en' | 'ru';
@@ -17,6 +18,15 @@ interface LanguageProviderProps {
 
 const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
+
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') as Language | null;
+
+  useEffect(() => {
+    if (lang && (lang === 'ru' || lang === 'en')) {
+      changeLanguage(lang);
+    }
+  }, [lang]);
 
   useEffect(() => {
     const storedLang = localStorage.getItem('language') as Language | null;

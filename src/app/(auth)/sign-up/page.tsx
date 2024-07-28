@@ -2,7 +2,6 @@ import clsx from 'clsx';
 
 import Banner from 'components/banner';
 import RegisterForm from 'components/form/register.form';
-import LanguageSwitcher from 'components/language';
 
 import styles from '../styles.module.scss';
 
@@ -15,8 +14,6 @@ export default function SignUp() {
             <Banner>
               <RegisterForm />
             </Banner>
-
-            <LanguageSwitcher />
           </div>
         </div>
       </div>

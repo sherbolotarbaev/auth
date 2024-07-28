@@ -14,11 +14,7 @@ export async function middleware(request: NextRequest) {
 
   const next = decodeURIComponent(searchParams.get('next') ?? '/');
 
-  if (
-    pathname === '/redirect' ||
-    pathname.startsWith('/images') ||
-    pathname === '/favicon.ico'
-  ) {
+  if (pathname.startsWith('/images') || pathname === '/favicon.ico') {
     return response;
   }
 
