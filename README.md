@@ -10,8 +10,8 @@
 This application requires Node.js v18.17+.
 
 ```
-git clone https://github.com/sherbolotarbaev/www.sherbolotarbaev.co.git
-cd www.sherbolotarbaev.co
+git clone https://github.com/sherbolotarbaev/auth.git
+cd auth
 pnpm install
 pnpm dev
 ```

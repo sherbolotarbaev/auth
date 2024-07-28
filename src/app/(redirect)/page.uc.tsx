@@ -12,7 +12,7 @@ export default function RedirectClient() {
       window?.location?.href?.split('to=')?.[1] || '/',
     );
 
-    window?.location?.assign(`https://sherbolotarbaev.co${redirectTo}`);
+    window?.location?.assign(`${process.env.NEXT_PUBLIC_WEB_URL}${redirectTo}`);
   }, []);
 
   return (
