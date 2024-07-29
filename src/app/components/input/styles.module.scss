@@ -19,10 +19,10 @@
     &.error {
       border-color: var(--red-border-color);
 
-      color: var(--bg-500);
+      color: var(--color-800);
 
       &::placeholder {
-        color: var(--color-300);
+        color: var(--color-400);
       }
 
       &:focus {

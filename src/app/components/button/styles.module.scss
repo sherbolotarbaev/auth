@@ -10,10 +10,6 @@
   justify-content: center;
   gap: 0.25rem;
 
-  @media (max-width: 768px) {
-    cursor: default;
-  }
-
   &.small {
     gap: 0.15rem;
 
@@ -55,7 +51,7 @@
 
   &.pulse_animation {
     transform: scale(1);
-    box-shadow: 0 0 0 var(--bg-white);
+    box-shadow: 0 0 0 var(--bg-500);
     animation: animation 2s infinite;
 
     @keyframes animation {
@@ -66,12 +62,12 @@
 
       75% {
         transform: scale(1);
-        box-shadow: 0 0 0 0.4rem var(--bg-white);
+        box-shadow: 0 0 0 0.4rem var(--bg-500);
       }
 
       100% {
         transform: scale(0.99);
-        box-shadow: 0 0 0 0 var(--bg-white);
+        box-shadow: 0 0 0 0 var(--bg-500);
       }
     }
   }

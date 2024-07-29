@@ -141,6 +141,7 @@ const LoginForm = () => {
             error={errors.email && errors.email.message}
             load={isOtpSending || isLoading}
             disabled={isOtpSending || isLoading || success}
+            autoComplete="email"
             register={register('email', {
               required: t('email_required'),
               pattern: {

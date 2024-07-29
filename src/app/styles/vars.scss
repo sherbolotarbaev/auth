@@ -1,7 +1,11 @@
 :root {
-  --bg-main: hsl(240 10% 3.9%);
-  --bg-main-hover: #212125;
-  --bg-main-active: #28282d;
+  --bg-main: hsl(240, 10%, 6%);
+  --bg-main-hover: hsl(240, 10%, 8%);
+  --bg-main-active: hsl(240, 10%, 10%);
+
+  --bg-500: hsl(240, 10%, 12%);
+  --bg-500-hover: hsl(240, 10%, 14%);
+  --bg-500-active: hsl(240, 10%, 16%);
 
   --bg-white: #fff;
   --bg-white-hover: #fefefe;
@@ -9,19 +13,19 @@
 
   --bg-blue: rgb(37 99 235 /1);
   --bg-blue-hover: rgb(59 130 246 / 1);
-  --bg-blue-active: rgb(53, 118, 222);
+  --bg-blue-active: rgba(53, 118, 222, 0.84);
 
-  --blue-color: rgba(37, 100, 235);
-  --blue-outline-color: rgba(37, 100, 235, 0.456);
-  --blue-border-color: rgba(37, 100, 235, 0.712);
+  --blue-color: rgb(68, 127, 255);
+  --blue-outline-color: rgba(26, 78, 189, 0.571);
+  --blue-border-color: rgba(68, 127, 255, 0.823);
 
   --bg-red: rgb(255, 111, 111);
   --bg-red-hover: rgb(255, 117, 117);
   --bg-red-active: rgb(222, 84, 84);
 
-  --red-color: rgb(255, 93, 93);
-  --red-outline-color: rgba(255, 93, 93, 0.263);
-  --red-border-color: rgba(255, 93, 93, 0.697);
+  --red-color: hsl(0 90.6% 70.8% / 1);
+  --red-outline-color: hsl(0 84.2% 60.2% / 0.3);
+  --red-border-color: hsl(0 90.6% 70.8% / 1);
 
   --border-radius-700: 1rem;
   --border-radius-500: 0.75rem;
@@ -29,10 +33,10 @@
   --border-radius-300: 0.3125rem;
   --border-radius-200: 0.25rem;
 
-  --color-800: rgb(37, 37, 37);
-  --color-600: rgba(38, 38, 44, 0.6);
-  --color-400: hsla(240, 4%, 46%, 0.6);
-  --color-300: hsla(240, 4%, 46%, 0.26);
+  --color-800: rgb(255 255 255 / 1);
+  --color-600: rgba(235, 235, 245, 0.763);
+  --color-400: rgba(235, 235, 245, 0.343);
+  --color-300: hsl(240, 7%, 19%);
 
   --min-width: 21.875rem;
   --max-width: 34.375rem;
