@@ -38,6 +38,13 @@
   --color-400: rgba(235, 235, 245, 0.343);
   --color-300: hsl(240, 7%, 19%);
 
+  --gradient-loader: linear-gradient(
+    90deg,
+    var(--color-300),
+    var(--bg-main),
+    var(--bg-500)
+  );
+
   --min-width: 21.875rem;
   --max-width: 34.375rem;
 

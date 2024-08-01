@@ -65,11 +65,7 @@ const LoginForm = () => {
     return false;
   };
 
-  const handleSubmitForm: SubmitHandler<FormData> = async ({ email }) => {
-    if (checkIsOtpValid()) {
-      return;
-    }
-
+  const handleSendOtp = () => {
     toast.promise(sendOtp({ email }).unwrap(), {
       position: 'top-center',
       loading: t('sendOtp_loading'),
@@ -82,9 +78,41 @@ const LoginForm = () => {
           ? t('error_user_not_found')
           : error.data?.message === 'User has been deactivated.'
           ? t('error_user_deactivated')
+          : error.data?.message?.startsWith('Please try again in')
+          ? error.data?.message
           : t('error_generic');
       },
     });
+  };
+
+  const handleLogInOtp = () => {
+    toast.promise(logIn({ email, otp, next }).unwrap(), {
+      position: 'top-center',
+      loading: t('loginOtp_loading'),
+      success: ({ redirectUrl, email }: LogInOtpResponse) => {
+        setSuccess(true);
+        setCookie('email', email);
+        router.push(`/?to=${redirectUrl}`);
+        return `${t('loginOtp_success')} ${email}`;
+      },
+      error: (error) => {
+        return error.data?.message === 'Incorrect verification code.'
+          ? t('error_otp_invalid')
+          : error.data?.message === 'Verification code expired.'
+          ? t('error_otp_expired')
+          : t('error_generic');
+      },
+    });
+  };
+
+  const handleSubmitForm: SubmitHandler<FormData> = () => {
+    handleSendOtp();
+  };
+
+  const resendOtp = async () => {
+    setIsOtpSent(false);
+    handleClearInput('otp');
+    handleSendOtp();
   };
 
   useEffect(() => {
@@ -95,23 +123,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (checkIsOtpValid()) {
-      toast.promise(logIn({ email, otp, next }).unwrap(), {
-        position: 'top-center',
-        loading: t('loginOtp_loading'),
-        success: ({ redirectUrl, email }: LogInOtpResponse) => {
-          setSuccess(true);
-          setCookie('email', email);
-          router.push(`/?to=${redirectUrl}`);
-          return `${t('loginOtp_success')} ${email}`;
-        },
-        error: (error) => {
-          return error.data?.message === 'Incorrect verification code.'
-            ? t('error_otp_invalid')
-            : error.data?.message === 'Verification code expired.'
-            ? t('error_otp_expired')
-            : t('error_generic');
-        },
-      });
+      handleLogInOtp();
     }
   }, [otp, isOtpSent]);
 
@@ -186,8 +198,11 @@ const LoginForm = () => {
 
             <div className="text">
               <p className="desc">
-                {t('email_sent_message')}{' '}
-                <span className="link">{t('email_sent_action')}</span>
+                {t('email_sent_message')}
+
+                <span className="link" onClick={resendOtp}>
+                  {t('email_sent_action')}
+                </span>
               </p>
             </div>
           </>
