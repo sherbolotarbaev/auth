@@ -5,7 +5,7 @@ interface ISiteConfig {
 }
 
 export const siteConfig: ISiteConfig = {
-  name: 'Authorization',
+  name: 'Sherbolot Arbaev',
   description: 'Authorization Service | Sherbolot Arbaev',
   url: 'https://auth.sherbolotarbaev.co',
 };

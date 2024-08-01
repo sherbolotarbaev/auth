@@ -32,6 +32,7 @@
   "email_required": "Please enter your email",
   "email_invalid": "Please enter a valid email",
   "email_sent_message": "We sent a code to your inbox.",
+  "email_sent_action": "Resend code",
 
   "otp_label": "6-digit verification code",
   "otp_required": "Please enter verification code",
