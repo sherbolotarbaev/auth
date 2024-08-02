@@ -14,7 +14,7 @@ const Logo = () => {
   return (
     <Link
       className={clsx('logo_wrapper', styles.logo_wrapper)}
-      href="/"
+      href={`${process.env.NEXT_PUBLIC_WEB_URL}`}
       style={{
         width: '2.2rem',
         height: '2.2rem',
