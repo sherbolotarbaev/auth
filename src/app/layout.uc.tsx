@@ -11,7 +11,7 @@ export default function RootLayoutClient({ children }: Readonly<RootLayoutClient
   return (
     <>
       <Providers>
-        {children}
+        <main>{children}</main>
         <Toaster />
       </Providers>
     </>

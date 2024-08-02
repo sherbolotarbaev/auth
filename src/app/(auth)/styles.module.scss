@@ -14,7 +14,7 @@
       width: 100%;
 
       max-width: 24rem;
-      min-width: 24rem;
+      min-width: var(--min-width);
     }
   }
 }
