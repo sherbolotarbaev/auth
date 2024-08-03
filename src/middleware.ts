@@ -56,8 +56,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (user && user.isActive && (pathname === '/sign-in' || pathname === '/sign-up')) {
-    const redirectUrl = new URL(`/?to=${next}`, url);
+  if (user && user.isActive && pathname !== '/') {
+    const redirectUrl = new URL(
+      `/?to=${
+        next !== '/'
+          ? next
+          : !['/sign-in', '/sign-up'].includes(pathname)
+          ? pathname
+          : '/'
+      }`,
+      url,
+    );
     return NextResponse.redirect(redirectUrl);
   }
 
