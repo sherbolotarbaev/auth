@@ -148,7 +148,7 @@ const LoginForm = () => {
 
         <Input
           label={t('email_label')}
-          placeholder="Enter your email..."
+          placeholder={t('email_placeholder')}
           error={errors.email && errors.email.message}
           load={isOtpSending || isLoading}
           disabled={isOtpSending || isLoading || success}
@@ -181,7 +181,7 @@ const LoginForm = () => {
           <>
             <Input
               label={t('otp_label')}
-              placeholder="Paste verification code..."
+              placeholder={t('otp_placeholder')}
               error={errors.otp && errors.otp.message}
               load={isLoading}
               disabled={isLoading || success}
