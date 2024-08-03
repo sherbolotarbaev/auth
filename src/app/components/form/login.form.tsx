@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { useLogInOtpMutation, useSendOtpMutation } from '@/redux/api/auth';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'shared/hooks/use-translation';
 
 import { getCookie, setCookie } from 'cookies-next';
