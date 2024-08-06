@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      {!load && error ? (
+      {/* {!load && error ? (
         <span className={styles.error}>{error}</span>
       ) : (
         label && (
@@ -41,7 +41,7 @@ const Input: React.FC<InputProps> = ({
             {label}
           </label>
         )
-      )}
+      )} */}
 
       <input
         className={className}
@@ -49,6 +49,8 @@ const Input: React.FC<InputProps> = ({
         {...(register ? register : { name })}
         {...props}
       />
+
+      {!load && error && <span className={styles.error}>{error}</span>}
     </div>
   );
 };

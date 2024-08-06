@@ -55,7 +55,7 @@ body {
   .container {
     width: 100%;
 
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 
   .title,
@@ -64,24 +64,29 @@ body {
     align-items: center;
     gap: 0.35rem;
 
+    letter-spacing: -0.016em;
+
     font-size: 0.985rem;
     font-weight: 500;
     color: var(--color-800);
   }
 
   .title {
-    font-size: 1.0625rem;
+    // font-size: 1.0625rem;
+    font-size: 2.15rem;
   }
 
   .desc {
     line-height: 1.25rem;
+    letter-spacing: -0.024em;
 
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.35rem;
 
-    font-size: 0.8125rem;
+    // font-size: 0.8125rem;
+    font-size: 0.875rem;
     color: var(--color-600);
   }
 
@@ -98,10 +103,13 @@ body {
       cursor: default;
     }
 
-    line-height: 1.2rem;
+    line-height: 1.25rem;
+    letter-spacing: -0.024em;
 
-    font-size: 0.8125rem;
-    color: var(--color-800);
+    // font-size: 0.8125rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-600);
 
     transition: var(--duration);
 
@@ -112,9 +120,11 @@ body {
 
   .btn-reset {
     width: 100%;
-    height: 2.25rem;
+    // height: 2.25rem;
+    height: 2.75rem;
 
-    padding: 0.375rem 0.75rem;
+    // padding: 0.375rem 0.75rem;
+    padding: 0 1rem;
 
     outline: none;
     cursor: pointer;
@@ -125,9 +135,14 @@ body {
 
     background: var(--bg-main);
     border: 1.2px solid var(--color-300);
-    border-radius: var(--border-radius-300);
+    // border-radius: var(--border-radius-300);
+    border-radius: var(--border-radius-700);
 
-    font-size: 0.8125rem;
+    line-height: 1.5rem;
+    letter-spacing: -0.008em;
+
+    // font-size: 0.8125rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--color-800);
 
@@ -150,16 +165,20 @@ body {
 
   .input-reset {
     width: 100%;
-    height: 2.25rem;
+    // height: 2.25rem;
+    height: 2.75rem;
 
-    padding: 0.375rem 0.75rem;
+    // padding: 0.375rem 0.75rem;
+    padding: 0.75rem 1rem;
 
     -webkit-appearance: none;
     appearance: none;
 
-    background: var(--bg-main);
+    // background: var(--bg-main);
+    background: var(--bg-500);
     border: 1.2px solid var(--color-300);
-    border-radius: var(--border-radius-300);
+    // border-radius: var(--border-radius-300);
+    border-radius: var(--border-radius-500);
     outline: 3px solid transparent;
 
     &::-webkit-search-decoration,
@@ -180,9 +199,13 @@ body {
       caret-color: var(--color-800);
     }
 
-    line-height: 1.38462rem;
+    // line-height: 1.38462rem;
+    line-height: 1.5rem;
+    letter-spacing: -0.008em;
 
-    font-size: 0.8125rem;
+    // font-size: 0.8125rem;
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--color-800);
 
     &::placeholder {
@@ -190,14 +213,14 @@ body {
     }
 
     &:focus {
-      border-color: var(--blue-border-color);
-      outline-color: var(--blue-outline-color);
+      border-color: var(--white-border-color);
+      outline-color: var(--white-outline-color);
     }
   }
 
   .logo_wrapper {
-    width: 5.25rem;
-    height: 5.25rem;
+    width: 3.25rem;
+    height: 3.25rem;
 
     margin-bottom: 1rem;
 

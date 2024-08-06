@@ -51,23 +51,23 @@
 
   &.pulse_animation {
     transform: scale(1);
-    box-shadow: 0 0 0 var(--bg-500);
+    box-shadow: 0 0 0 transparent;
     animation: animation 2s infinite;
 
     @keyframes animation {
       0% {
         transform: scale(0.99);
-        box-shadow: 0 0 0 0 var(--bg-blue);
+        box-shadow: 0 0 0 0 var(--bg-white);
       }
 
       75% {
         transform: scale(1);
-        box-shadow: 0 0 0 0.4rem var(--bg-500);
+        box-shadow: 0 0 0 0.4rem transparent;
       }
 
       100% {
         transform: scale(0.99);
-        box-shadow: 0 0 0 0 var(--bg-500);
+        box-shadow: 0 0 0 0 transparent;
       }
     }
   }
@@ -102,6 +102,40 @@
         background: var(--bg-blue-hover);
 
         color: var(--bg-white-active);
+      }
+    }
+  }
+
+  &.white {
+    background: var(--bg-white);
+    border-color: transparent;
+
+    color: var(--bg-main);
+
+    &:hover {
+      color: var(--bg-main);
+      background: var(--bg-white-hover);
+    }
+
+    &:active {
+      background: var(--bg-white-active);
+    }
+
+    &.disabled,
+    &.load {
+      background: var(--bg-white-hover);
+
+      cursor: not-allowed;
+
+      color: var(--bg-main-active);
+
+      opacity: 0.6;
+
+      &:hover,
+      &:active {
+        background: var(--bg-white-hover);
+
+        color: var(--bg-main-active);
       }
     }
   }

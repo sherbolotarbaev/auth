@@ -1,15 +1,24 @@
 :root {
-  --bg-main: hsl(240, 10%, 6%);
-  --bg-main-hover: hsl(240, 10%, 8%);
-  --bg-main-active: hsl(240, 10%, 10%);
+  // --bg-main: hsl(240, 10%, 6%);
+  --bg-main: hsl(0 0% 6.67% / 1);
+  // --bg-main-hover: hsl(240, 10%, 8%);
+  --bg-main-hover: hsl(0 0% 11.76% / 1);
+  // --bg-main-active: hsl(240, 10%, 10%);
+  --bg-main-active: hsl(0 0% 11.76% / 1);
 
-  --bg-500: hsl(240, 9.47%, 10.39%);
+  // --bg-500: hsl(240, 9.47%, 10.39%);
+  --bg-500: hsl(0 0% 18.04% / 1);
   --bg-500-hover: hsl(240, 9.47%, 14%);
   --bg-500-active: hsl(240, 9.47%, 16%);
 
-  --bg-white: #fff;
+  // --bg-white: #fff;
+  --bg-white: hsl(0 0% 94.12% / 1);
   --bg-white-hover: #fefefe;
   --bg-white-active: #f2f2f2;
+
+  --white-color: hsl(0 0% 94.12% / 1);
+  --white-outline-color: hsla(0, 0%, 94%, 0.291);
+  --white-border-color: hsl(0 0% 94.12% / 1);
 
   --bg-blue: rgb(37 99 235 /1);
   --bg-blue-hover: rgb(59 130 246 / 1);
@@ -19,13 +28,17 @@
   --blue-outline-color: rgba(26, 78, 189, 0.571);
   --blue-border-color: rgba(68, 127, 255, 0.823);
 
-  --bg-red: rgb(255, 111, 111);
+  // --bg-red: rgb(255, 111, 111);
+  --bg-red: hsl(10.96deg 88.89% 54.12% / 12%);
   --bg-red-hover: rgb(255, 117, 117);
   --bg-red-active: rgb(222, 84, 84);
 
-  --red-color: hsl(0 90.6% 70.8% / 1);
-  --red-outline-color: hsl(0 84.2% 60.2% / 0.3);
-  --red-border-color: hsl(0 90.6% 70.8% / 1);
+  // --red-color: hsl(0 90.6% 70.8% / 1);
+  --red-color: hsl(10.96 88.89% 54.12% / 1);
+  // --red-outline-color: hsl(0 84.2% 60.2% / 0.3);
+  --red-outline-color: hsla(11, 89%, 54%, 0.291);
+  // --red-border-color: hsl(0 90.6% 70.8% / 1);
+  --red-border-color: hsl(10.96 88.89% 54.12% / 1);
 
   --border-radius-700: 1rem;
   --border-radius-500: 0.75rem;
@@ -34,9 +47,11 @@
   --border-radius-200: 0.25rem;
 
   --color-800: rgb(255 255 255 / 1);
-  --color-600: rgba(235, 235, 245, 0.763);
+  // --color-600: rgba(235, 235, 245, 0.763);
+  --color-600: hsl(0 0% 59.61% / 1);
   --color-400: rgba(235, 235, 245, 0.343);
-  --color-300: hsl(240, 7%, 19%);
+  // --color-300: hsl(240, 7%, 19%);
+  --color-300: hsl(0 0% 23.92% / 1);
 
   --gradient-loader: linear-gradient(
     90deg,

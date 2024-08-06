@@ -168,7 +168,7 @@ const LoginForm = () => {
 
         {!isOtpSent && (
           <Button
-            theme="blue"
+            theme="white"
             load={isOtpSending}
             disabled={isOtpSending || success || !isValid}
             pulseAnimation={success || isValid}

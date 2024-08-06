@@ -47,12 +47,12 @@ const OAuthButtons = () => {
   const authProviders: AuthProvider[] = [
     {
       name: 'google',
-      svgIcon: <FcGoogle size={17} />,
+      svgIcon: <FcGoogle size={20} />,
       actionText: t('google_button'),
     },
     {
       name: 'github',
-      svgIcon: <BiLogoGithub size={18} />,
+      svgIcon: <BiLogoGithub size={21} />,
       actionText: t('github_button'),
     },
   ];
