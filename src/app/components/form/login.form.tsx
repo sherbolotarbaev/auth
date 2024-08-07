@@ -18,6 +18,7 @@ import Logo from 'components/logo';
 import Link from 'next/link';
 
 import { BiSolidRightArrow } from 'react-icons/bi';
+import { MdOutlineMailLock } from 'react-icons/md';
 import styles from './styles.module.scss';
 
 type FormData = {
@@ -47,12 +48,17 @@ const LoginForm = () => {
 
   const [isOtpSent, setIsOtpSent] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [continueWithEmail, setContinueWithEmail] = useState<boolean>(false);
 
   const otp = watch('otp');
   const email = watch('email');
 
+  const handleContinueWithEmail = async () => {
+    setContinueWithEmail(true);
+  };
+
   const handleClearInput = (name: keyof FormData) => {
-    if (name === 'email') {
+    if (name === 'otp') {
       setIsOtpSent(false);
       setValue('otp', '');
     }
@@ -133,96 +139,106 @@ const LoginForm = () => {
         <div className={clsx('text', styles.text)}>
           <Logo />
 
-          <h2 className={clsx('title', styles.title)}>{t('signIn_title')}</h2>
+          <h2 className="title">{t('signIn_title')}</h2>
 
-          <p className={clsx('desc', styles.desc)}>{t('signIn_description')}</p>
+          <p className="desc">{t('signIn_description')}</p>
         </div>
 
-        <OAuthButtons />
+        {!continueWithEmail ? (
+          <>
+            <OAuthButtons />
 
-        <div className={styles.divider}>
-          <hr />
-          <span>{t('divider')}</span>
-          <hr />
-        </div>
+            <div className={styles.divider}>
+              <hr />
+              <span>{t('divider')}</span>
+              <hr />
+            </div>
 
-        <Input
-          label={t('email_label')}
-          placeholder={t('email_placeholder')}
-          error={errors.email && errors.email.message}
-          load={isOtpSending || isLoading}
-          disabled={isOtpSending || isLoading || success}
-          autoComplete="email"
-          register={register('email', {
-            required: t('email_required'),
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: t('email_invalid'),
-            },
-            onChange: () => {
-              setIsOtpSent(false);
-              handleClearInput('otp');
-            },
-          })}
-        />
-
-        {!isOtpSent && (
-          <Button
-            theme="white"
-            load={isOtpSending}
-            disabled={isOtpSending || success || !isValid}
-            pulseAnimation={success || isValid}
-          >
-            {t('button')} <BiSolidRightArrow size={8} />
-          </Button>
-        )}
-
-        {isOtpSent && (
+            <Button onClick={handleContinueWithEmail}>
+              <MdOutlineMailLock size={20} /> {t('email_button')}
+            </Button>
+          </>
+        ) : (
           <>
             <Input
-              label={t('otp_label')}
-              placeholder={t('otp_placeholder')}
-              error={errors.otp && errors.otp.message}
-              load={isLoading}
-              disabled={isLoading || success}
-              register={register('otp', {
-                required: t('otp_required'),
+              label={t('email_label')}
+              placeholder={t('email_placeholder')}
+              error={errors.email && errors.email.message}
+              load={isOtpSending || isLoading}
+              disabled={isOtpSending || isLoading || success}
+              autoComplete="email"
+              register={register('email', {
+                required: t('email_required'),
                 pattern: {
-                  value: /^\d+$/,
-                  message: t('otp_invalid'),
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: t('email_invalid'),
                 },
-                minLength: 6,
-                maxLength: 6,
+                onChange: () => handleClearInput('otp'),
               })}
             />
 
-            <div className="text">
-              <p className="desc">
-                {t('email_sent_message')}
+            {isOtpSent ? (
+              <>
+                <Input
+                  label={t('otp_label')}
+                  placeholder={t('otp_placeholder')}
+                  error={errors.otp && errors.otp.message}
+                  load={isLoading}
+                  disabled={isLoading || success}
+                  register={register('otp', {
+                    required: t('otp_required'),
+                    pattern: {
+                      value: /^\d+$/,
+                      message: t('otp_invalid'),
+                    },
+                    minLength: {
+                      value: 6,
+                      message: t('otp_required'),
+                    },
+                    maxLength: {
+                      value: 6,
+                      message: t('otp_required'),
+                    },
+                  })}
+                />
 
-                <span className="link" onClick={resendOtp}>
-                  {t('email_sent_action')}
-                </span>
-              </p>
-            </div>
+                <div className={clsx('text', styles.text)}>
+                  <p className="desc">
+                    {t('email_sent_message')}
+
+                    <span className="link" onClick={resendOtp}>
+                      {t('email_sent_action')}
+                    </span>
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <Button
+                  theme="white"
+                  load={isOtpSending}
+                  disabled={isOtpSending || success || !isValid}
+                  pulseAnimation={success || isValid}
+                >
+                  {t('button')} <BiSolidRightArrow size={8} />
+                </Button>
+
+                <div className={clsx('text', styles.text)}>
+                  <p className="desc">
+                    {t('signIn_link_description')}
+
+                    <Link
+                      className="link"
+                      href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
+                    >
+                      {t('signIn_link')}
+                    </Link>
+                  </p>
+                </div>
+              </>
+            )}
           </>
         )}
-
-        <p
-          className="desc"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          {t('signIn_link_description')}
-          <Link
-            className="link"
-            href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
-          >
-            {t('signIn_link')}
-          </Link>
-        </p>
       </div>
     </form>
   );

@@ -22,28 +22,25 @@ const RegisterForm = () => {
         <div className={clsx('text', styles.text)}>
           <Logo />
 
-          <h2 className={clsx('title', styles.title)}>{t('signUp_title')}</h2>
+          <h2 className="title">{t('signUp_title')}</h2>
 
-          <p className={clsx('desc', styles.desc)}>{t('signUp_description')}</p>
+          <p className="desc">{t('signUp_description')}</p>
         </div>
 
         <OAuthButtons />
 
-        <p
-          className="desc"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          {t('signUp_link_description')}
-          <Link
-            className="link"
-            href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
-          >
-            {t('signUp_link')}
-          </Link>
-        </p>
+        <div className={clsx('text', styles.text)}>
+          <p className="desc">
+            {t('signUp_link_description')}
+
+            <Link
+              className="link"
+              href={next !== '/' ? `/sign-in?next=${next}` : '/sign-in'}
+            >
+              {t('signUp_link')}
+            </Link>
+          </p>
+        </div>
       </div>
     </form>
   );
