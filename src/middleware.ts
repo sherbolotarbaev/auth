@@ -30,6 +30,15 @@ export async function middleware(request: NextRequest) {
     headers.append('cookie', `session=${session.value}`);
     headers.append('user-agent', userAgent);
 
+    const handleLogout = async () => {
+      try {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
+          method: 'POST',
+          headers,
+        });
+      } catch (_) {}
+    };
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/me`, {
         method: 'GET',
@@ -38,8 +47,14 @@ export async function middleware(request: NextRequest) {
 
       const me = await response.json();
 
-      if (me.statusCode === 401 || me.statusCode === 403) {
+      if (me.statusCode === 401) {
         responseCookies.delete(session);
+      }
+
+      if (me.statusCode === 403 && pathname !== '/sign-in') {
+        await handleLogout();
+        const redirectUrl = new URL('/sign-in?error=403', url);
+        return NextResponse.redirect(redirectUrl);
       }
 
       if (me.email) {
