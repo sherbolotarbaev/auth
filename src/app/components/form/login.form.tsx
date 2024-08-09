@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useLogInOtpMutation, useSendOtpMutation } from '@/redux/api/auth';
 import { type SubmitHandler, useForm } from 'react-hook-form';
@@ -18,7 +18,6 @@ import Logo from 'components/logo';
 import Link from 'next/link';
 
 import { BiSolidRightArrow } from 'react-icons/bi';
-import { MdOutlineMailLock } from 'react-icons/md';
 import styles from './styles.module.scss';
 
 type FormData = {
@@ -66,10 +65,10 @@ const LoginForm = () => {
     setValue(name, '');
   };
 
-  const checkIsOtpValid = () => {
-    if (otp && isOtpSent && otp.length === 6 && /^\d+$/.test(otp)) return true;
-    return false;
-  };
+  const checkIsOtpValid = useCallback(
+    () => otp && isOtpSent && otp.length === 6 && /^\d+$/.test(otp),
+    [otp, isOtpSent],
+  );
 
   const handleSendOtp = () => {
     toast.promise(sendOtp({ email }).unwrap(), {
@@ -77,6 +76,7 @@ const LoginForm = () => {
       loading: t('sendOtp_loading'),
       success: () => {
         setIsOtpSent(true);
+        handleContinueWithEmail();
         return t('sendOtp_success');
       },
       error: (error) => {
@@ -85,6 +85,9 @@ const LoginForm = () => {
           : error.data?.message === 'User has been deactivated.'
           ? t('error_user_deactivated')
           : error.data?.message?.startsWith('Please try again in')
+          ? error.data?.message
+          : error.data?.message ===
+            'Current operation is too frequent, please try again later!'
           ? error.data?.message
           : t('error_generic');
       },
@@ -122,16 +125,9 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    if (cookieEmail) {
-      setValue('email', cookieEmail);
-    }
-  }, [cookieEmail]);
-
-  useEffect(() => {
-    if (checkIsOtpValid()) {
-      handleLogInOtp();
-    }
-  }, [otp, isOtpSent]);
+    if (cookieEmail) setValue('email', cookieEmail);
+    if (checkIsOtpValid()) handleLogInOtp();
+  }, [cookieEmail, checkIsOtpValid]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
@@ -144,7 +140,7 @@ const LoginForm = () => {
           <p className="desc">{t('signIn_description')}</p>
         </div>
 
-        {!continueWithEmail ? (
+        {!continueWithEmail && (
           <>
             <OAuthButtons />
 
@@ -153,90 +149,84 @@ const LoginForm = () => {
               <span>{t('divider')}</span>
               <hr />
             </div>
-
-            <Button onClick={handleContinueWithEmail}>
-              <MdOutlineMailLock size={20} /> {t('email_button')}
-            </Button>
           </>
-        ) : (
+        )}
+
+        <Input
+          label={t('email_label')}
+          placeholder={t('email_placeholder')}
+          error={errors.email && errors.email.message}
+          load={isOtpSending || isLoading}
+          disabled={isOtpSending || isLoading || success}
+          autoComplete="email"
+          register={register('email', {
+            required: t('email_required'),
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: t('email_invalid'),
+            },
+            onChange: () => handleClearInput('otp'),
+          })}
+        />
+
+        {isOtpSent ? (
           <>
             <Input
-              label={t('email_label')}
-              placeholder={t('email_placeholder')}
-              error={errors.email && errors.email.message}
-              load={isOtpSending || isLoading}
-              disabled={isOtpSending || isLoading || success}
-              autoComplete="email"
-              register={register('email', {
-                required: t('email_required'),
+              label={t('otp_label')}
+              placeholder={t('otp_placeholder')}
+              error={errors.otp && errors.otp.message}
+              load={isLoading}
+              disabled={isLoading || success}
+              register={register('otp', {
+                required: t('otp_required'),
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: t('email_invalid'),
+                  value: /^\d+$/,
+                  message: t('otp_invalid'),
                 },
-                onChange: () => handleClearInput('otp'),
+                minLength: {
+                  value: 6,
+                  message: t('otp_required'),
+                },
+                maxLength: {
+                  value: 6,
+                  message: t('otp_required'),
+                },
               })}
             />
 
-            {isOtpSent ? (
-              <>
-                <Input
-                  label={t('otp_label')}
-                  placeholder={t('otp_placeholder')}
-                  error={errors.otp && errors.otp.message}
-                  load={isLoading}
-                  disabled={isLoading || success}
-                  register={register('otp', {
-                    required: t('otp_required'),
-                    pattern: {
-                      value: /^\d+$/,
-                      message: t('otp_invalid'),
-                    },
-                    minLength: {
-                      value: 6,
-                      message: t('otp_required'),
-                    },
-                    maxLength: {
-                      value: 6,
-                      message: t('otp_required'),
-                    },
-                  })}
-                />
+            <div className={clsx('text', styles.text)}>
+              <p className="desc">
+                {t('email_sent_message')}
 
-                <div className={clsx('text', styles.text)}>
-                  <p className="desc">
-                    {t('email_sent_message')}
+                <span className="link" onClick={resendOtp}>
+                  {t('email_sent_action')}
+                </span>
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <Button
+              theme="white"
+              load={isOtpSending}
+              disabled={isOtpSending || success || !isValid}
+              pulseAnimation={success || isValid}
+            >
+              {t('button')} <BiSolidRightArrow size={8} />
+            </Button>
 
-                    <span className="link" onClick={resendOtp}>
-                      {t('email_sent_action')}
-                    </span>
-                  </p>
-                </div>
-              </>
-            ) : (
-              <>
-                <Button
-                  theme="white"
-                  load={isOtpSending}
-                  disabled={isOtpSending || success || !isValid}
-                  pulseAnimation={success || isValid}
+            <div className={clsx('text', styles.text)}>
+              <p className="desc">
+                {t('signIn_link_description')}
+
+                <Link
+                  className="link"
+                  href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
                 >
-                  {t('button')} <BiSolidRightArrow size={8} />
-                </Button>
-
-                <div className={clsx('text', styles.text)}>
-                  <p className="desc">
-                    {t('signIn_link_description')}
-
-                    <Link
-                      className="link"
-                      href={next !== '/' ? `/sign-up?next=${next}` : '/sign-up'}
-                    >
-                      {t('signIn_link')}
-                    </Link>
-                  </p>
-                </div>
-              </>
-            )}
+                  {t('signIn_link')}
+                </Link>
+              </p>
+            </div>
           </>
         )}
       </div>

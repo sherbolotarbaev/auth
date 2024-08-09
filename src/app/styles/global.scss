@@ -213,6 +213,7 @@ body {
     }
 
     &:focus {
+      background: var(--bg-500-active);
       border-color: var(--white-border-color);
       outline-color: var(--white-outline-color);
     }
