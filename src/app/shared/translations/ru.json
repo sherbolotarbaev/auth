@@ -1,5 +1,5 @@
 {
-  "signIn_title": "Войдите на sherbolotarbaev.co",
+  "signIn_title": "Войдите в sherbolotarbaev.co",
   "signIn_description": "С возвращением! Пожалуйста, войдите, чтобы продолжить.",
   "signIn_link_description": "Нет аккаунта?",
   "signIn_link": "Зарегистрироваться",
@@ -11,6 +11,7 @@
 
   "divider": "или",
   "button": "Продолжить",
+  "termsOfServiceAndPrivacyPolicy": "Продолжая, вы соглашаетесь с нашими Условиями обслуживания и Политикой конфиденциальности.",
 
   "google_button": "Продолжить с Google",
   "github_button": "Продолжить с GitHub",

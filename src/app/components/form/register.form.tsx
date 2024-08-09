@@ -27,7 +27,13 @@ const RegisterForm = () => {
           <p className="desc">{t('signUp_description')}</p>
         </div>
 
-        <OAuthButtons />
+        <div className={styles.content_container}>
+          <OAuthButtons />
+
+          <div className={clsx('text', styles.text)}>
+            <p className="desc small">{t('termsOfServiceAndPrivacyPolicy')}</p>
+          </div>
+        </div>
 
         <div className={clsx('text', styles.text)}>
           <p className="desc">

@@ -11,6 +11,7 @@
 
   "divider": "or",
   "button": "Continue",
+  "termsOfServiceAndPrivacyPolicy": "By continuing, you agree to our Terms of Service and Privacy Policy.",
 
   "google_button": "Continue with Google",
   "github_button": "Continue with GitHub",
